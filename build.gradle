@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'java-test-fixtures'
+}
+
+group 'com.jrmcdonald'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    commonPlatform
+    implementation.extendsFrom(commonPlatform)
+    testFixturesImplementation.extendsFrom(commonPlatform)
+}
+
+dependencies {
+    commonPlatform enforcedPlatform(group: 'org.springframework.boot', name: 'spring-boot-dependencies', version: '2.4.2')
+    commonPlatform enforcedPlatform(group: 'org.testcontainers', name: 'testcontainers-bom', version: '1.15.2')
+
+    implementation group: 'org.liquibase', name: 'liquibase-core'
+    implementation group: 'org.postgresql', name: 'postgresql'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+    testImplementation group: 'org.testcontainers', name: 'testcontainers'
+    testImplementation group: 'org.testcontainers', name: 'junit-jupiter'
+    testImplementation group: 'org.testcontainers', name: 'postgresql'
+
+    testFixturesImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+    testFixturesImplementation group: 'org.testcontainers', name: 'testcontainers'
+    testFixturesImplementation group: 'org.testcontainers', name: 'postgresql'
+}
+
+test {
+    useJUnitPlatform()
+}

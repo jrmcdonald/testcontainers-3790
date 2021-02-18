@@ -1,0 +1,15 @@
+environment:
+  name: unit-test
+
+spring:
+  test:
+    database:
+      replace: none
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default-schema: bookentity
+  liquibase:
+    default-schema: bookentity
